@@ -23,21 +23,50 @@ To get started with creating a site, simply:
 
 If you want to maintain your docs in the `docs` directory of an existing project repo, see [Hosting your docs from an existing project repo](https://github.com/just-the-docs/just-the-docs-template/blob/main/README.md#hosting-your-docs-from-an-existing-project-repo) in the template README.
 
-{% chart_js %}
-ChartJS.line do
-  data do
-    labels ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-    dataset "Cats" do
-      color :random
-      data [12, 19, 3, 5, 2, 3]
-    end 
-    dataset "Dogs" do
-      color :random
-      data [10, 12, 3, 4, 5, 3]
-    end 
-  end
-end
-{% endchart_js %}
+<!-- Include Chart.js library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"></script>
+
+<div style="width: 50%">
+  <canvas id="canvas" height="450" width="600"></canvas>
+</div>
+
+{% raw %}
+<script>
+function getRandomDataArray() {
+  var dataArray = [];
+  for (var i = 0; i < 7; i++) {
+    dataArray.push(Math.round(Math.random() * 100));
+  }
+  return dataArray;
+}
+
+var chartData = {
+  labels: ["January", "February", "March", "April", "May", "June", "July"],
+  datasets: [
+    {
+      label: "My First dataset",
+      data: getRandomDataArray(),
+    },
+    {
+      label: "My Second dataset",
+      data: getRandomDataArray(),
+    },
+  ],
+};
+
+window.onload = function () {
+  var ctx = document.getElementById("canvas").getContext("2d");
+  var myLineChart = new Chart(ctx, {
+    type: "line",
+    data: chartData,
+    options: {
+      responsive: true,
+    },
+  });
+};
+</script>
+{% endraw %}
+
 
 ----
 
