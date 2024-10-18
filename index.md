@@ -29,7 +29,6 @@ If you want to maintain your docs in the `docs` directory of an existing project
   <canvas id="canvas" height="450" width="600"></canvas>
 </div>
 
-{% raw %}
 <script>
   // Simple log message to check if the script is running
   console.log("Script is running!");
@@ -70,7 +69,6 @@ If you want to maintain your docs in the `docs` directory of an existing project
     console.log("Chart created: ", myLineChart); // Debugging chart creation
   };
 </script>
-{% endraw %}
 
 
 ----
