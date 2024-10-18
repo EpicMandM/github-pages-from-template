@@ -30,7 +30,6 @@ If you want to maintain your docs in the `docs` directory of an existing project
 </div>
 
 <script>
-  // Simple log message to check if the script is running
   console.log("Script is running!");
 
   var chartData = {
@@ -47,7 +46,7 @@ If you want to maintain your docs in the `docs` directory of an existing project
     ]
   };
 
-  console.log("Chart data: ", chartData); // Debugging chart data
+  console.log("Chart data: ", chartData);
 
   window.onload = function () {
     console.log("Window loaded!");
@@ -66,7 +65,7 @@ If you want to maintain your docs in the `docs` directory of an existing project
       }
     });
 
-    console.log("Chart created: ", myLineChart); // Debugging chart creation
+    console.log("Chart created: ", myLineChart);
   };
 </script>
 
