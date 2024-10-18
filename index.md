@@ -29,6 +29,8 @@ If you want to maintain your docs in the `docs` directory of an existing project
   <canvas id="canvas" height="450" width="600"></canvas>
 </div>
 
+<pre>{{ site.data.chart_data | jsonify }}</pre>
+
 <script>
   // Use Liquid to pass the JSON data from _data/chart_data.json
   var chartData = {
@@ -45,22 +47,26 @@ If you want to maintain your docs in the `docs` directory of an existing project
     ]
   };
 
-  console.log(chartData); // Debugging step
+  console.log(chartData); // Check if chartData is populated correctly
 
   window.onload = function () {
-    var ctx = document.getElementById("canvas").getContext("2d");
-    if (!ctx) {
-      console.error("Canvas context is not available.");
-      return;
-    }
-    var myLineChart = new Chart(ctx, {
-      type: 'line',
-      data: chartData,
-      options: {
-        responsive: true,
+      var ctx = document.getElementById("canvas").getContext("2d");
+      console.log(ctx); // Check if canvas context is available
+      
+      if (!ctx) {
+        console.error("Canvas context is not available.");
+        return;
       }
-    });
-  };
+      
+      var myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: chartData,
+        options: {
+          responsive: true,
+        }
+      });
+
+    console.log(myLineChart); // Check if Chart.js instance is created
 </script>
 
 
