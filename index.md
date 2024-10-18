@@ -32,38 +32,31 @@ If you want to maintain your docs in the `docs` directory of an existing project
 
 {% raw %}
 <script>
-function getRandomDataArray() {
-  var dataArray = [];
-  for (var i = 0; i < 7; i++) {
-    dataArray.push(Math.round(Math.random() * 100));
-  }
-  return dataArray;
-}
+  // Use Liquid to pass the JSON data from _data/chart_data.json
+  var chartData = {
+    labels: {{ site.data.chart_data.labels | jsonify }},
+    datasets: [
+      {
+        label: {{ site.data.chart_data.datasets[0].label | jsonify }},
+        data: {{ site.data.chart_data.datasets[0].data | jsonify }},
+      },
+      {
+        label: {{ site.data.chart_data.datasets[1].label | jsonify }},
+        data: {{ site.data.chart_data.datasets[1].data | jsonify }},
+      }
+    ]
+  };
 
-var chartData = {
-  labels: ["January", "February", "March", "April", "May", "June", "July"],
-  datasets: [
-    {
-      label: "My First dataset",
-      data: getRandomDataArray(),
-    },
-    {
-      label: "My Second dataset",
-      data: getRandomDataArray(),
-    },
-  ],
-};
-
-window.onload = function () {
-  var ctx = document.getElementById("canvas").getContext("2d");
-  var myLineChart = new Chart(ctx, {
-    type: "line",
-    data: chartData,
-    options: {
-      responsive: true,
-    },
-  });
-};
+  window.onload = function () {
+    var ctx = document.getElementById("canvas").getContext("2d");
+    var myLineChart = new Chart(ctx, {
+      type: 'line',
+      data: chartData,
+      options: {
+        responsive: true,
+      }
+    });
+  };
 </script>
 {% endraw %}
 
