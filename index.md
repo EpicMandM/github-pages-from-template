@@ -23,14 +23,12 @@ To get started with creating a site, simply:
 
 If you want to maintain your docs in the `docs` directory of an existing project repo, see [Hosting your docs from an existing project repo](https://github.com/just-the-docs/just-the-docs-template/blob/main/README.md#hosting-your-docs-from-an-existing-project-repo) in the template README.
 
-<!-- Include Chart.js library -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <div style="width: 50%">
   <canvas id="canvas" height="450" width="600"></canvas>
 </div>
 
-{% raw %}
 <script>
   // Use Liquid to pass the JSON data from _data/chart_data.json
   var chartData = {
@@ -47,8 +45,14 @@ If you want to maintain your docs in the `docs` directory of an existing project
     ]
   };
 
+  console.log(chartData); // Debugging step
+
   window.onload = function () {
     var ctx = document.getElementById("canvas").getContext("2d");
+    if (!ctx) {
+      console.error("Canvas context is not available.");
+      return;
+    }
     var myLineChart = new Chart(ctx, {
       type: 'line',
       data: chartData,
@@ -58,7 +62,6 @@ If you want to maintain your docs in the `docs` directory of an existing project
     });
   };
 </script>
-{% endraw %}
 
 
 ----
