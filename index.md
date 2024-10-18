@@ -23,51 +23,49 @@ To get started with creating a site, simply:
 
 If you want to maintain your docs in the `docs` directory of an existing project repo, see [Hosting your docs from an existing project repo](https://github.com/just-the-docs/just-the-docs-template/blob/main/README.md#hosting-your-docs-from-an-existing-project-repo) in the template README.
 
+<!-- Include Chart.js library -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <div style="width: 50%">
   <canvas id="canvas" height="450" width="600"></canvas>
 </div>
 
-<pre>{{ site.data.chart_data | jsonify }}</pre>
-
+{% raw %}
 <script>
-  // Use Liquid to pass the JSON data from _data/chart_data.json
-  var chartData = {
-    labels: {{ site.data.chart_data.labels | jsonify }},
-    datasets: [
-      {
-        label: {{ site.data.chart_data.datasets[0].label | jsonify }},
-        data: {{ site.data.chart_data.datasets[0].data | jsonify }},
-      },
-      {
-        label: {{ site.data.chart_data.datasets[1].label | jsonify }},
-        data: {{ site.data.chart_data.datasets[1].data | jsonify }},
-      }
-    ]
-  };
+function getRandomDataArray() {
+  var dataArray = [];
+  for (var i = 0; i < 7; i++) {
+    dataArray.push(Math.round(Math.random() * 100));
+  }
+  return dataArray;
+}
 
-  console.log(chartData); // Check if chartData is populated correctly
+var chartData = {
+  labels: ["January", "February", "March", "April", "May", "June", "July"],
+  datasets: [
+    {
+      label: "My First dataset",
+      data: getRandomDataArray(),
+    },
+    {
+      label: "My Second dataset",
+      data: getRandomDataArray(),
+    },
+  ],
+};
 
-  window.onload = function () {
-      var ctx = document.getElementById("canvas").getContext("2d");
-      console.log(ctx); // Check if canvas context is available
-      
-      if (!ctx) {
-        console.error("Canvas context is not available.");
-        return;
-      }
-      
-      var myLineChart = new Chart(ctx, {
-        type: 'line',
-        data: chartData,
-        options: {
-          responsive: true,
-        }
-      });
-
-    console.log(myLineChart); // Check if Chart.js instance is created
+window.onload = function () {
+  var ctx = document.getElementById("canvas").getContext("2d");
+  var myLineChart = new Chart(ctx, {
+    type: "line",
+    data: chartData,
+    options: {
+      responsive: true,
+    },
+  });
+};
 </script>
+{% endraw %}
 
 
 ----
