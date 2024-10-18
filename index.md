@@ -31,7 +31,6 @@ If you want to maintain your docs in the `docs` directory of an existing project
 
 {% raw %}
 <script>
-  // Use Liquid to pass the JSON data from _data/chart_data.json
   var chartData = {
     labels: {{ site.data.chart_data.labels | jsonify }},
     datasets: [
@@ -46,8 +45,15 @@ If you want to maintain your docs in the `docs` directory of an existing project
     ]
   };
 
+  // Debugging: print the chartData to verify it's populated correctly
+  console.log(chartData);
+
   window.onload = function () {
     var ctx = document.getElementById("canvas").getContext("2d");
+    if (!ctx) {
+      console.error("Canvas context not found");
+      return;
+    }
     var myLineChart = new Chart(ctx, {
       type: "line",
       data: chartData,
